@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="caf4f88c-7081-4f91-a67c-ffe92b468b50" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change beforePath="$PROJECT_DIR$/.idea/webResources.xml" afterPath="" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/definitions.go" afterPath="$PROJECT_DIR$/src/definitions.go" />
-      <change beforePath="$PROJECT_DIR$/src/tzParser.go" afterPath="$PROJECT_DIR$/src/tzParser.go" />
-      <change beforePath="$PROJECT_DIR$/src/tzParser_test.go" afterPath="$PROJECT_DIR$/src/tzParser_test.go" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
