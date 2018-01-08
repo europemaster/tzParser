@@ -6,6 +6,7 @@ import (
 	"errors"
 	"strconv"
 	"koala2/src/golang.org/x/net/html/atom"
+	"bytes"
 )
 
 type logMessage string
@@ -29,9 +30,19 @@ func createRegex(layout string) (string, error) {
 			delC = 0
 		}
 	}
-	var regx []rune
-	for j := 0; j< len(delimiters); j++ {
-		regx = append(regx, '[0-9]')
+	//var regx []rune
+	var regx bytes.Buffer
+	for j := 0; j < len(counters); j++ {
+		if j == (len(counters) - 1) {
+			regx.WriteString("[0-9]{")
+			regx.WriteString(string(counters[j]))
+			regx.WriteString("}")
+		} else {
+			regx.WriteString("[0-9]{")
+			regx.WriteString(string(counters[j]))
+			regx.WriteString("}\")
+			regx.WriteString(string(delimiters[j]))
+		}
 	}
 }
 

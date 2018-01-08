@@ -24,7 +24,7 @@ func main()  {
 		}
 		logM := logMessage(singleByt)
 		//change format to go standard
-		ts, err := logM.getTS("2017/01/02 10:04:15.000000")
+		ts, err := logM.getTS("2006/01/02 15:04:05.999999")
 		if err != nil {
 			fmt.Println(err)
 		}
