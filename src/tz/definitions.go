@@ -6,6 +6,7 @@ import (
 	"strconv"
 	"bytes"
 	"strings"
+	"fmt"
 )
 
 type logMessage string
@@ -19,28 +20,41 @@ func createRegex(layout string) ([]string) {
 	var counters []int
 	var delimiters []string
 	delC := 0
-	for _, r := range layout {
+	for i, r := range layout {
 		r := string(r)
 		if _, err := strconv.Atoi(r); err == nil {
-			delC++
+			//fmt.Println(r + " is number")
+			if i == len(layout) - 1 {
+				delC++
+				counters = append(counters, delC)
+			} else {
+				delC++
+			}
 		} else {
+			//fmt.Println(r + " is delimiter")
 			counters = append(counters, delC)
 			delimiters = append(delimiters, r)
 			delC = 0
 		}
 	}
-	//var regx []rune
 	var regx bytes.Buffer
-	for j := 0; j < len(counters); j++ {
-		if j == (len(counters) - 1) {
+	//fmt.Println(counters)
+	//fmt.Println(delimiters)
+	for ind, c := range counters {
+		//fmt.Println("index: ", ind)
+		if ind == (len(counters) - 1) {
 			regx.WriteString("[0-9]{")
-			regx.WriteString(string(counters[j]))
+			regx.WriteString(strconv.Itoa(c))
 			regx.WriteString("}")
+			break
 		} else {
+			//fmt.Println("ELSE")
+			//fmt.Println(delimiters[ind])
 			regx.WriteString("[0-9]{")
-			regx.WriteString(string(counters[j]))
+			regx.WriteString(strconv.Itoa(c))
 			regx.WriteString("}\\")
-			regx.WriteString(string(delimiters[j]))
+			regx.WriteString(string(delimiters[ind]))
+			//fmt.Println(strings.Fields(regx.String()))
 		}
 	}
 	return strings.Fields(regx.String())
@@ -53,8 +67,11 @@ func (l logMessage) getTS(layout string) (timeStamp, error) {
 	//}
 
 	tsReg, _ := regexp.Compile(strings.Join(rgx, " "))
+	fmt.Println("tsReg: ", tsReg)
 	tsStr := tsReg.FindString(string(l))
+	fmt.Println("tsStr: ",tsStr)
 	ts, err := time.Parse(layout, tsStr)
+	fmt.Println("ts: ",ts)
 
 	if err != nil {
 		return timeStamp(time.Time{}), err
