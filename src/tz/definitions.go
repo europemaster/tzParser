@@ -90,3 +90,15 @@ func (t timeStamp) changeTo(location string) (timeStamp, error) {
 	}
 }
 
+//replace old ts with new one
+func (l logMessage) generate(layout string, location string) (logMessage, error) {
+	regx := createRegex(layout)
+	ts, err := l.getTS(layout)
+	if err != nil {
+		return "", err
+	}
+	newTs, err := ts.changeTo(location)
+	return regx.ReplaceAllString(l, newTs), nil
+}
+
+//benchmark, how many logs/s
