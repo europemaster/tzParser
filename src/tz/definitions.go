@@ -12,9 +12,9 @@ import (
 type logMessage string
 type timeStamp time.Time
 
-
-//`[0-9]{4}\/[0-9]{2}\/[0-9]{2}\ [0-9]{2}\:+[0-9]{2}\:+[0-9]{2}\.+[0-9]{6}`
-
+func hi() string {
+	return "Hello"
+}
 func createRegex(layout string) ([]string) {
 	//regx := `[0-9]{4}\/[0-9]{2}\/[0-9]{2}\ [0-9]{2}\:+[0-9]{2}\:+[0-9]{2}\.+[0-9]{6}`
 	var counters []int
@@ -93,12 +93,15 @@ func (t timeStamp) changeTo(location string) (timeStamp, error) {
 //replace old ts with new one
 func (l logMessage) generate(layout string, location string) (logMessage, error) {
 	regx := createRegex(layout)
-	ts, err := l.getTS(layout)
-	if err != nil {
-		return "", err
+	//ts, err := l.getTS(layout)
+	//if err != nil {
+	//	return "", err
+	//}
+	//newTs, err := ts.changeTo(location)
+	//r, _ := regexp.Compile(regx)
+	for ind, c := range regx {
+		fmt.Println(ind, c)
 	}
-	newTs, err := ts.changeTo(location)
-	return regx.ReplaceAllString(l, newTs), nil
+	return "", nil
+	//return r.ReplaceAllString(l, newTs), nil
 }
-
-//benchmark, how many logs/s

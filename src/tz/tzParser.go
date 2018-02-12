@@ -17,13 +17,22 @@ func main() {
 	}
 	readF := bufio.NewReader(file)
 	for {
-		singleByt, err := readF.ReadBytes('\n')
+		line, err := readF.ReadString('\n')
 		if err != nil {
 			errors.New("Error reading")
 			break
 		}
-		logM := logMessage(singleByt)
-		newLine := logM.generate()
+		fmt.Println(line)
+		hi()
+		//logM := logMessage(line)
+		//newLine, err2 := logM.generate("2006/01/02 15:04:05.999", "Europe/Ljubljana")
+		//if err2 != nil {
+		//	errors.New("Error generating new string")
+		//}
+		//fmt.Println(newLine)
+	}
+
+
 	//	//change format to go standard
 	//	ts, err := logM.getTS("2006/01/02 15:04:05.999999")
 	//	if err != nil {
