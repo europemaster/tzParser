@@ -46,6 +46,7 @@ func createRegex(layout string) ([]string) {
 			regx.WriteString("[0-9]{")
 			regx.WriteString(strconv.Itoa(c))
 			regx.WriteString("}")
+			//add timezone regex
 			break
 		} else {
 			//fmt.Println("ELSE")
@@ -54,6 +55,7 @@ func createRegex(layout string) ([]string) {
 			regx.WriteString(strconv.Itoa(c))
 			regx.WriteString("}\\")
 			regx.WriteString(string(delimiters[ind]))
+			//add timezone regex
 			//fmt.Println(strings.Fields(regx.String()))
 		}
 	}
