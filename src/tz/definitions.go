@@ -60,48 +60,49 @@ func createRegex(layout string) ([]string) {
 	return strings.Fields(regx.String())
 }
 
-func (l logMessage) getTS(layout string) (timeStamp, error) {
+func (l logMessage) getTS(layout string) (time.Time, error) {
 	rgx := createRegex(layout)
 	//if errR != nil {
 	//	return timeStamp(time.Time{}), errors.New("could not make regex out of given layout")
 	//}
 
 	tsReg, _ := regexp.Compile(strings.Join(rgx, " "))
-	fmt.Println("tsReg: ", tsReg)
+	//fmt.Println("tsReg: ", tsReg)
 	tsStr := tsReg.FindString(string(l))
-	fmt.Println("tsStr: ",tsStr)
+	//fmt.Println("tsStr: ",tsStr)
 	ts, err := time.Parse(layout, tsStr)
-	fmt.Println("ts: ",ts)
+	//fmt.Println("ts: ",reflect.TypeOf(ts))
 
 	if err != nil {
-		return timeStamp(time.Time{}), err
+		return time.Time{}, err
 	}
-	return timeStamp(ts), nil
+	return ts, nil
 }
 
 // location "Europe/Ljubljana"
 
-func (t timeStamp) changeTo(location string) (timeStamp, error) {
+func changeTo(t time.Time, location string) (time.Time, error) {
 	loc, err := time.LoadLocation(location)
 	if err == nil {
-		return timeStamp(time.Time(t).In(loc)), nil
+		return time.Time(t).In(loc), nil
 	} else {
-		return timeStamp(time.Time{}), err
+		return time.Time{}, err
 	}
 }
 
 //replace old ts with new one
 func (l logMessage) generate(layout string, location string) (logMessage, error) {
 	regx := createRegex(layout)
-	//ts, err := l.getTS(layout)
-	//if err != nil {
-	//	return "", err
-	//}
-	//newTs, err := ts.changeTo(location)
-	//r, _ := regexp.Compile(regx)
-	for ind, c := range regx {
-		fmt.Println(ind, c)
+	regex := strings.Join(regx, " ")
+	//fmt.Println("regex", regex)
+	//fmt.Println("logline", l)
+	ts, err := l.getTS(layout)
+	//fmt.Println("ts", ts)
+	if err != nil {
+		return "", err
 	}
-	return "", nil
-	//return r.ReplaceAllString(l, newTs), nil
+	newTs, err := changeTo(ts, location)
+	r, _ := regexp.Compile(regex)
+	fmt.Println(layout, location)
+	return logMessage(r.ReplaceAllString(string(l), newTs.String())), nil
 }

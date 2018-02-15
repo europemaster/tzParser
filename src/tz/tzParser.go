@@ -1,35 +1,39 @@
 package main
 
 import (
-	"fmt"
 	"flag"
 	"os"
 	"bufio"
 	"errors"
+	"fmt"
 )
 
 func main() {
 	flag.Parse()
 	filename := flag.Arg(0)
+	layoutFlag := flag.Arg(1)
+	locationFlag := flag.Arg(2)
 	file, err := os.Open(filename)
 	if err != nil {
 		file = os.Stdin
 	}
 	readF := bufio.NewReader(file)
+
 	for {
+		fmt.Println(locationFlag, layoutFlag)
 		line, err := readF.ReadString('\n')
 		if err != nil {
 			errors.New("Error reading")
 			break
 		}
-		fmt.Println(line)
-		hi()
-		//logM := logMessage(line)
-		//newLine, err2 := logM.generate("2006/01/02 15:04:05.999", "Europe/Ljubljana")
-		//if err2 != nil {
-		//	errors.New("Error generating new string")
-		//}
-		//fmt.Println(newLine)
+		fmt.Println("original line", line)
+		logM := logMessage(line)
+		//logM.generate("2006/01/02 15:04:05.999", "Europe/Ljubljana")
+		newLine, err2 := logM.generate(layoutFlag, locationFlag)
+		if err2 != nil {
+			errors.New("Error generating new string")
+		}
+		fmt.Println("converted line", newLine)
 	}
 
 
