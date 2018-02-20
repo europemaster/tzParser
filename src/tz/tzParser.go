@@ -20,34 +20,17 @@ func main() {
 	readF := bufio.NewReader(file)
 
 	for {
-		fmt.Println(locationFlag, layoutFlag)
 		line, err := readF.ReadString('\n')
 		if err != nil {
-			errors.New("Error reading")
+			errors.New("error reading")
 			break
 		}
-		fmt.Println("original line", line)
+		fmt.Println("Original line: ", line)
 		logM := logMessage(line)
-		//logM.generate("2006/01/02 15:04:05.999", "Europe/Ljubljana")
 		newLine, err2 := logM.generate(layoutFlag, locationFlag)
 		if err2 != nil {
-			errors.New("Error generating new string")
+			errors.New("error generating new string")
 		}
-		fmt.Println("converted line", newLine)
+		fmt.Println("Converted line: ", newLine)
 	}
-
-
-	//	//change format to go standard
-	//	ts, err := logM.getTS("2006/01/02 15:04:05.999999")
-	//	if err != nil {
-	//		fmt.Println(err)
-	//	}
-	//	tsLocal, err2 := ts.changeTo("Europe/Ljubljana")
-	//	if err2 != nil {
-	//		fmt.Println(err2)
-	//	}
-	//	fmt.Println("Original log: %s", logM)
-	//	fmt.Println("Extracted timestamp: %s", ts)
-	//	fmt.Println("Localized timestamp: ", tsLocal)
-	//}
 }
