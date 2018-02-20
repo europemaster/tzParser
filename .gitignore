@@ -14,3 +14,4 @@
 .idea/*
 *.text
 *.exe
+Would skip repository src/github.com/europemaster/tzParser
