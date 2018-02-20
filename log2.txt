@@ -1,0 +1,9 @@
+2018/02/19 00:22:26.437 UTC (joan-we-02.gateway.4.2.6-rc.1+e66fbaf) [info] Updating bootloader on "3d005200-0b51-3630-3435-303800000000" to 3.23.1984 (hw 1.0.2, crc 98b322eb, nameID 5)
+2018/02/19 00:22:26.445 UTC (joan-we-02.gateway.4.2.6-rc.1+e66fbaf) [info] bootloader update: sending block 0 to "3d005200-0b51-3630-3435-303800000000" ...
+2018/02/19 00:22:28.258 UTC (joan-we-02.gateway.4.2.6-rc.1+e66fbaf) [info] '56005600-1151-3634-3836-313600000000' -> Server (id        0x1, status, 211.46 kb/s)
+2018/02/19 00:22:28.258 UTC (joan-we-02.gateway.4.2.6-rc.1+e66fbaf) [info] Got heartbeat from "56005600-1151-3634-3836-313600000000"
+2018/02/19 00:22:28.259 UTC (joan-we-02.gateway.4.2.6-rc.1+e66fbaf) [info] Created: 2018-02-17 23:22:28.258942432 +0000 UTC, now: 2018-02-19 00:22:28.259005164 +0000 UTC
+2018/02/19 00:22:28.259 UTC (joan-we-02.gateway.4.2.6-rc.1+e66fbaf) [info] Checking '56005600-1151-3634-3836-313600000000' (display: 3640983800)
+2018/02/19 00:22:28.307 UTC (joan-we-02.gateway.4.2.6-rc.1+e66fbaf) [info] Didn't find bootloader for "56005600-1151-3634-3836-313600000000", [1 0 2], [3 23 1984], 5
+2018/02/19 00:22:30.522 UTC (joan-we-02.gateway.4.2.6-rc.1+e66fbaf) [error] Error receiving from "3d005200-0b51-3630-3435-303800000000": reading header: connection closed
+2018/02/19 23:22:30.522 UTC (joan-we-02.gateway.4.2.6-rc.1+e66fbaf) [info] Device "3d005200-0b51-3630-3435-303800000000" disconnected
